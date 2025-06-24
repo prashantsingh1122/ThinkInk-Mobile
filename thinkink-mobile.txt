@@ -1,0 +1,47 @@
+thinkink-mobile/
+├── assets/                  # Static assets (images, icons, fonts)
+│   ├── images/
+│   └── fonts/
+│
+├── components/              # Reusable UI components
+│   ├── PostCard.js
+│   ├── Button.js
+│   └── Header.js
+│
+├── constants/               # App-wide constants (colors, config)
+│   ├── Colors.js
+│   └── Config.js
+│
+├── context/                 # Global state (AuthContext, ThemeContext, etc.)
+│   └── AuthContext.js
+│
+├── hooks/                   # Custom hooks
+│   └── useAuth.js
+│
+├── navigation/              # React Navigation setup
+│   ├── RootNavigator.js
+│   └── AppTabs.js
+│
+├── screens/                 # All app screens/pages
+│   ├── Auth/
+│   │   ├── Login.js
+│   │   └── Register.js
+│   ├── Home.js
+│   ├── PostEditor.js
+│   ├── PostDetails.js
+│   ├── Dashboard.js
+│   └── Settings.js
+│
+├── services/                # API requests (Axios setup)
+│   ├── api.js
+│   ├── auth.js
+│   └── posts.js
+│
+├── utils/                   # Helper functions (validators, formatters, etc.)
+│   ├── validators.js
+│   └── formatDate.js
+│
+├── App.js                   # Entry point
+├── app.json                 # Expo config
+├── babel.config.js          # Babel setup (for aliasing)
+└── package.json
