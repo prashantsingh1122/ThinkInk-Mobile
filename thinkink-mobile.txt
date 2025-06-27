@@ -31,3 +31,6 @@ thinkink-mobile/
 ├── package.json
 ├── tsconfig.json
 └── README.md
+
+
+cd thinkink-mobile

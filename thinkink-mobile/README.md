@@ -48,3 +48,18 @@ Join our community of developers creating universal apps.
 
 - [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
 - [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+
+## FRONTEND UI DEPENDENCIES
+# npm install react-native-paper @expo/vector-icons
+react-native-paper: For beautiful, mobile-friendly UI components.
+@expo/vector-icons: For a wide range of icons that work seamlessly with Expo.
+2. (Optional but recommended) Install and configure react-native-safe-area-context:
+Expo already includes this, but if you ever eject or want to be explicit:
+
+## npm install react-native-safe-area-context
+Expo already includes this, but if you ever eject or want to be explicit:
+
+This helps your UI avoid notches and system bars.
+## npm install moti
+
+But for most use cases, you can use the built-in Animated API or just stick with react-native-paper for smooth UI.

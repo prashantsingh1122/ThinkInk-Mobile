@@ -1,18 +1,20 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { View, KeyboardAvoidingView, Platform, StyleSheet, TouchableOpacity } from 'react-native';
-import { Button, Text, TextInput, ActivityIndicator } from 'react-native-paper';
+import { Text, TextInput, Button, ActivityIndicator } from 'react-native-paper';
 import { useRouter } from 'expo-router';
 
-export default function Login() {
+export default function Register() {
+  const [Name, setName] = useState('');
   const [Email, setEmail] = useState('');
   const [Password, setPassword] = useState('');
+  const [ConfirmPassword, setConfirmPassword] = useState('');
   const [Error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
 
-  const handleAuthentication = async () => {
+  const handleRegister = async () => {
     setError('');
-    if (!Email || !Password) {
+    if (!Name || !Email || !Password || !ConfirmPassword) {
       setError('Please fill all fields');
       return;
     }
@@ -20,12 +22,16 @@ export default function Login() {
       setError('Password must be at least 6 characters long');
       return;
     }
+    if (Password !== ConfirmPassword) {
+      setError('Passwords do not match');
+      return;
+    }
     setIsLoading(true);
     // Simulate API call
     setTimeout(() => {
       setIsLoading(false);
-      // On success, navigate to dashboard or home
-      // router.push('/dashboard');
+      // On success, navigate to login or dashboard
+      router.push('/login');
     }, 1500);
   };
 
@@ -43,10 +49,22 @@ export default function Login() {
         <Text style={styles.homeLinkText}>🏠 ThinkInk</Text>
       </TouchableOpacity>
 
-      {/* Form Container */}
       <View style={styles.formContainer}>
-        <Text style={styles.title}>Login</Text>
+        <Text style={styles.title}>Register</Text>
         {Error ? <Text style={styles.error}>{Error}</Text> : null}
+        <TextInput
+          label="Name"
+          placeholder="Enter your name"
+          autoCapitalize="words"
+          mode="flat"
+          value={Name}
+          onChangeText={setName}
+          style={styles.input}
+          textColor="black"
+          underlineColor="#a78bfa"
+          activeUnderlineColor="#a78bfa"
+          theme={{ colors: { placeholder: '#a1a1aa' } }}
+        />
         <TextInput
           label="Email"
           placeholder="Enter your email"
@@ -56,7 +74,7 @@ export default function Login() {
           value={Email}
           onChangeText={setEmail}
           style={styles.input}
-          textColor="#fff"
+          textColor="black"
           underlineColor="#a78bfa"
           activeUnderlineColor="#a78bfa"
           theme={{ colors: { placeholder: '#a1a1aa' } }}
@@ -70,34 +88,42 @@ export default function Login() {
           value={Password}
           onChangeText={setPassword}
           style={styles.input}
-          textColor="#fff"
+          textColor="black"
           underlineColor="#a78bfa"
           activeUnderlineColor="#a78bfa"
           theme={{ colors: { placeholder: '#a1a1aa' } }}
         />
-        <TouchableOpacity
-          style={styles.forgot}
-          onPress={() => router.push('/forgotpassword')}
-        >
-          <Text style={styles.forgotText}>Forgot password?</Text>
-        </TouchableOpacity>
+        <TextInput
+          label="Confirm Password"
+          placeholder="Confirm Password"
+          autoCapitalize="none"
+          secureTextEntry
+          mode="flat"
+          value={ConfirmPassword}
+          onChangeText={setConfirmPassword}
+          style={styles.input}
+          textColor="black"
+          underlineColor="#a78bfa"
+          activeUnderlineColor="#a78bfa"
+          theme={{ colors: { placeholder: '#a1a1aa' } }}
+        />
         <Button
           mode="contained"
-          onPress={handleAuthentication}
+          onPress={handleRegister}
           style={styles.button}
           contentStyle={{ paddingVertical: 8 }}
           buttonColor="#a78bfa"
           disabled={isLoading}
         >
-          {isLoading ? <ActivityIndicator color="#fff" /> : "Sign In"}
+          {isLoading ? <ActivityIndicator color="#fff" /> : "Sign Up"}
         </Button>
         <Text style={styles.signupText}>
-          Don't have an account?{' '}
+          Already have an account?{' '}
           <Text
             style={styles.signupLink}
-            onPress={() => router.push('/register')}
+            onPress={() => router.push('/login')}
           >
-            Sign Up
+            Sign In
           </Text>
         </Text>
       </View>
@@ -127,8 +153,8 @@ const styles = StyleSheet.create({
     letterSpacing: 1,
   },
   formContainer: {
-    width: '100%',
-    maxWidth: 400,
+    width: '90%',
+    maxWidth: 800,
     backgroundColor: 'rgba(255,255,255,0.05)',
     borderRadius: 24,
     padding: 24,
@@ -156,17 +182,10 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     marginBottom: 16,
     borderRadius: 10,
-  },
-  forgot: {
-    alignSelf: 'flex-end',
-    marginBottom: 16,
-  },
-  forgotText: {
-    color: "white",
-    fontSize: 14,
+    
   },
   button: {
-    borderRadius: 30,
+    borderRadius: 24,
     marginBottom: 16,
   },
   signupText: {
